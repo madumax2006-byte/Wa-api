@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment Form</title>
+    <style>
+        .appointment-form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .appointment-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .appointment-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .appointment-form button {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .appointment-form button:hover {
+            background-color: #1ebd55;
+        }
+    </style>
+</head>
+<body>
+    <form id="appointmentForm" class="appointment-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+        
+        <label for="service">Service Type:</label>
+        <input type="text" id="service" name="service" required>
+        
+        <button type="submit">Book Appointment</button>
+    </form>
+
+    <script>
+        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form values
+            const name = document.getElementById("name").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const service = document.getElementById("service").value;
+
+            // Create formatted WhatsApp message
+            const message = `📅 *New Appointment Booking*\n\n` +
+                           `👤 *Name*: ${name}\n` +
+                           `📅 *Date*: ${date}\n` +
+                           `⏰ *Time*: ${time}\n` +
+                           `💼 *Service*: ${service}\n\n` +
+                           `Please confirm this booking.`;
+
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+
+            // WhatsApp number (replace with your number, include country code)
+            const phoneNumber = "+94720797915"; // ඔයාගේ WhatsApp number එක මෙතන දාන්න
+
+            // WhatsApp link
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            // Redirect to WhatsApp
+            window.location.href = whatsappLink;
+        });
+    </script>
+</body>
+          </html>
